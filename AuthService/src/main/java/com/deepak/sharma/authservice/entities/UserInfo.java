@@ -2,6 +2,7 @@ package com.deepak.sharma.authservice.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -16,12 +17,13 @@ import static lombok.AccessLevel.PRIVATE;
 @Data
 @Table(name = "users")
 @Entity
+@Builder
 @FieldDefaults(level = PRIVATE)
 public class UserInfo {
 
     @Id
     @Column(name = "user_id")
-    Long userId;
+    String userId;
 
     String userName;
 
