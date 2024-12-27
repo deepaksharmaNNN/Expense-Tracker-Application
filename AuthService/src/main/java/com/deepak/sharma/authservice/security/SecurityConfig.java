@@ -1,6 +1,7 @@
 package com.deepak.sharma.authservice.security;
 
 import com.deepak.sharma.authservice.repository.UserRepository;
+import com.deepak.sharma.authservice.security.filters.JwtAuthFilter;
 import com.deepak.sharma.authservice.service.UserDetailsServiceImpl;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,7 @@ public class SecurityConfig {
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .httpBasic(Customizer.withDefaults())
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-                .authenticationProvider()
+                .authenticationProvider(authenticationProvider())
                 .build();
     }
 
@@ -65,5 +66,5 @@ public class SecurityConfig {
     public UserDetailsService userDetailsService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         return new UserDetailsServiceImpl(userRepository, passwordEncoder);
     }
-    //010526
+    //011400
 }

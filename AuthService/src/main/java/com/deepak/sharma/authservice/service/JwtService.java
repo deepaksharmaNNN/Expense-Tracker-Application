@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -61,5 +62,9 @@ public class JwtService {
     private Key getSignKey() {
         byte[] secretBytes = Decoders.BASE64.decode(secretKey);
         return Keys.hmacShaKeyFor(secretBytes);
+    }
+    public String GenerateToken(String username){
+        Map<String, Object> claims = new HashMap<>();
+        return createToken(claims, username);
     }
 }
