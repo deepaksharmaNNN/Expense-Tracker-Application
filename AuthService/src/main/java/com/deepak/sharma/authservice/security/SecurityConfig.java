@@ -30,7 +30,7 @@ public class SecurityConfig {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private UserDetailsServiceImpl userDetailsService;
+    private UserDetailsService userDetailsService;
 
 
     @Bean
