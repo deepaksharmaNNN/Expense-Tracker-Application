@@ -63,7 +63,7 @@ public class JwtService {
         byte[] secretBytes = Decoders.BASE64.decode(secretKey);
         return Keys.hmacShaKeyFor(secretBytes);
     }
-    public String GenerateToken(String username){
+    public String generateToken(String username){
         Map<String, Object> claims = new HashMap<>();
         return createToken(claims, username);
     }
