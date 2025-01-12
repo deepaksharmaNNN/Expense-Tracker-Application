@@ -1,5 +1,6 @@
 package com.deepak.sharma.authservice.service;
 
+import com.deepak.sharma.authservice.dto.request.SignupRequest;
 import com.deepak.sharma.authservice.entity.Role;
 import com.deepak.sharma.authservice.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,22 +23,23 @@ public class AuthService {
     private PasswordEncoder passwordEncoder;
 
 
-    public User registerUser(String username, String email, String password, Set<String> roleNames) {
-        if (userService.findByUsername(username).isPresent() || userService.findByEmail(email).isPresent()) {
+    public User registerUser(SignupRequest signupRequest) {
+        if (userService.findByUsername(signupRequest.getUsername()).isPresent() ||
+                userService.findByEmail(signupRequest.getEmail()).isPresent()) {
             throw new RuntimeException("User already exists!");
         }
 
         Set<Role> roles = new HashSet<>();
-        for (String roleName : roleNames) {
+        for (String roleName : signupRequest.getRoles()) {
             Role role = roleService.findByName(roleName)
                     .orElseThrow(() -> new RuntimeException("Role not found: " + roleName));
             roles.add(role);
         }
 
         User user = User.builder()
-                .username(username)
-                .email(email)
-                .password(passwordEncoder.encode(password))
+                .username(signupRequest.getUsername())
+                .email(signupRequest.getEmail())
+                .password(passwordEncoder.encode(signupRequest.getPassword()))
                 .roles(roles)
                 .build();
 

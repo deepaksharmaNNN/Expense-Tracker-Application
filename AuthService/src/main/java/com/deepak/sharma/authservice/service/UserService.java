@@ -2,7 +2,6 @@ package com.deepak.sharma.authservice.service;
 
 import com.deepak.sharma.authservice.entity.User;
 import com.deepak.sharma.authservice.repository.UserRepository;
-import com.fasterxml.jackson.databind.introspect.AnnotationCollector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
