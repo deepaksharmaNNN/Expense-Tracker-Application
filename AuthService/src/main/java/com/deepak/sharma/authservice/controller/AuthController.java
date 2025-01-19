@@ -6,10 +6,7 @@ import com.deepak.sharma.authservice.service.JwtService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("v1/auth")
@@ -21,7 +18,12 @@ public class AuthController {
     @Autowired
     private JwtService jwtService;
 
-    @PostMapping("/signup") // http://localhost:8080/v1/auth/signup
+    @GetMapping("/") // http://localhost:8081/v1/auth/
+    public String home() {
+        return "Welcome to Auth Service!";
+    }
+
+    @PostMapping("/signup") // http://localhost:8081/v1/auth/signup
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         try {
             authService.registerUser(signUpRequest);
