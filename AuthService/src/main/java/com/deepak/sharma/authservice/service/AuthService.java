@@ -24,8 +24,7 @@ public class AuthService {
 
 
     public Boolean registerUser(SignupRequest signupRequest) {
-        if (userService.findByUsername(signupRequest.getUsername()).isPresent() ||
-                userService.findByEmail(signupRequest.getEmail()).isPresent()) {
+        if (userService.findByUsername(signupRequest.getUsername()).isPresent()) {
             throw new RuntimeException("User already exists!");
         }
 

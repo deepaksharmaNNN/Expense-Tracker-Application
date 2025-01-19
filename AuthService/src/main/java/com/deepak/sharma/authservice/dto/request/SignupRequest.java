@@ -4,9 +4,12 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -26,6 +29,5 @@ public class SignupRequest {
     @Size(min = 6, max = 40, message = "Password must be between 6 and 40 characters")
     String password;
 
-
-    Set<String> roles;
+    Set<String> roles = new HashSet<>();
 }
