@@ -1,4 +1,4 @@
-package com.deepak.sharma.authservice.dto.response;
+package com.deepak.sharma.authservice.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,7 +11,6 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @Builder
 @FieldDefaults(level = lombok.AccessLevel.PRIVATE)
-public class JwtResponse {
-    String accessToken;
+public class RefreshTokenRequest {
     String refreshToken;
 }

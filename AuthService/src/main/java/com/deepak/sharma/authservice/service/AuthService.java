@@ -23,7 +23,7 @@ public class AuthService {
     private PasswordEncoder passwordEncoder;
 
 
-    public User registerUser(SignupRequest signupRequest) {
+    public void registerUser(SignupRequest signupRequest) {
         if (userService.findByUsername(signupRequest.getUsername()).isPresent() ||
                 userService.findByEmail(signupRequest.getEmail()).isPresent()) {
             throw new RuntimeException("User already exists!");
@@ -38,11 +38,10 @@ public class AuthService {
 
         User user = User.builder()
                 .username(signupRequest.getUsername())
-                .email(signupRequest.getEmail())
                 .password(passwordEncoder.encode(signupRequest.getPassword()))
                 .roles(roles)
                 .build();
 
-        return userService.save(user);
+        userService.save(user);
     }
 }
