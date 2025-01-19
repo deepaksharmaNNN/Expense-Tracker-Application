@@ -23,7 +23,7 @@ public class AuthService {
     private PasswordEncoder passwordEncoder;
 
 
-    public void registerUser(SignupRequest signupRequest) {
+    public Boolean registerUser(SignupRequest signupRequest) {
         if (userService.findByUsername(signupRequest.getUsername()).isPresent() ||
                 userService.findByEmail(signupRequest.getEmail()).isPresent()) {
             throw new RuntimeException("User already exists!");
@@ -43,5 +43,6 @@ public class AuthService {
                 .build();
 
         userService.save(user);
+        return Boolean.TRUE;
     }
 }
