@@ -3,6 +3,7 @@ package com.deepak.sharma.authservice.service;
 import com.deepak.sharma.authservice.dto.request.SignupRequest;
 import com.deepak.sharma.authservice.entity.Role;
 import com.deepak.sharma.authservice.entity.User;
+import com.deepak.sharma.authservice.events.producer.UserProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,9 @@ public class AuthService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private UserProducer userProducer;
 
 
     public Boolean registerUser(SignupRequest signupRequest) {
@@ -42,6 +46,7 @@ public class AuthService {
                 .build();
 
         userService.save(user);
+        // send event to kafka
         return Boolean.TRUE;
     }
 }
