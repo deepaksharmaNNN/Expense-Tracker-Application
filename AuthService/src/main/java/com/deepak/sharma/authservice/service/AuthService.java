@@ -50,11 +50,11 @@ public class AuthService {
 
         userService.save(user);
         // send event to kafka
-        UserInfoDto userInfoDto = buildUserInfoDto(user, signupRequest);
+        UserInfoDto userInfoDto = buildUserInfoDto(signupRequest);
         userProducer.sendEventToKafka(userInfoDto);
         return Boolean.TRUE;
     }
-    private UserInfoDto buildUserInfoDto(User user, SignupRequest signupRequest) {
+    private UserInfoDto buildUserInfoDto(SignupRequest signupRequest) {
         return UserInfoDto.builder()
                 .email(signupRequest.getEmail())
                 .firstName(signupRequest.getFirstName())
