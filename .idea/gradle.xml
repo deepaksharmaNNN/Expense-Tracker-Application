@@ -14,7 +14,11 @@
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/UserService" />
-        <option name="gradleJvm" value="21" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/UserService" />
+          </set>
+        </option>
       </GradleProjectSettings>
     </option>
   </component>
