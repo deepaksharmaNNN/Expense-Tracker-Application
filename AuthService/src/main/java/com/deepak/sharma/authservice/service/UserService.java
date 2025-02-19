@@ -1,6 +1,7 @@
 package com.deepak.sharma.authservice.service;
 
 import com.deepak.sharma.authservice.entity.User;
+import com.deepak.sharma.authservice.events.producer.UserProducer;
 import com.deepak.sharma.authservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,6 +18,9 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UserProducer userProducer;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

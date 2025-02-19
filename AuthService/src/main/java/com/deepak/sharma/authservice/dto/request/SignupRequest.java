@@ -16,6 +16,15 @@ import java.util.Set;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class SignupRequest {
 
+    @NotBlank
+    String firstName;
+
+    @NotBlank
+    String lastName;
+
+    @NotBlank
+    String phone;
+
     @NotBlank(message = "Username is required")
     @Size(min = 3, max = 20, message = "Username must be between 3 and 20 characters")
     String username;

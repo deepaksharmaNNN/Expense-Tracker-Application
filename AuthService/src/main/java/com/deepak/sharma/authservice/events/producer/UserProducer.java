@@ -1,6 +1,6 @@
 package com.deepak.sharma.authservice.events.producer;
 
-import com.deepak.sharma.authservice.entity.User;
+import com.deepak.sharma.authservice.dto.UserInfoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -11,18 +11,18 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserProducer {
-    private final KafkaTemplate<String, User> kafkaTemplate;
+    private final KafkaTemplate<String, UserInfoDto> kafkaTemplate;
 
-    @Value("${kafka.topic.user}")
-    private String topic;
+    @Value("${spring.kafka.topic.name}")
+    private String topicName;
 
-    public void sendEventToKafka(User user) {
-        Message<User> message = MessageBuilder.withPayload(user).setHeader(KafkaHeaders.TOPIC, topic).build();
+    public void sendEventToKafka(UserInfoDto user) {
+        Message<UserInfoDto> message = MessageBuilder.withPayload(user).setHeader(KafkaHeaders.TOPIC, topicName).build();
         kafkaTemplate.send(message);
     }
 
     @Autowired
-    public UserProducer(KafkaTemplate<String, User> kafkaTemplate) {
+    public UserProducer(KafkaTemplate<String, UserInfoDto> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 }

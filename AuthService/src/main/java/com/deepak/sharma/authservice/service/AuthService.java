@@ -1,9 +1,11 @@
 package com.deepak.sharma.authservice.service;
 
+import com.deepak.sharma.authservice.dto.UserInfoDto;
 import com.deepak.sharma.authservice.dto.request.SignupRequest;
 import com.deepak.sharma.authservice.entity.Role;
 import com.deepak.sharma.authservice.entity.User;
 import com.deepak.sharma.authservice.events.producer.UserProducer;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
+@Slf4j
 public class AuthService {
 
     @Autowired
@@ -47,6 +50,16 @@ public class AuthService {
 
         userService.save(user);
         // send event to kafka
+        UserInfoDto userInfoDto = buildUserInfoDto(user, signupRequest);
+        userProducer.sendEventToKafka(userInfoDto);
         return Boolean.TRUE;
+    }
+    private UserInfoDto buildUserInfoDto(User user, SignupRequest signupRequest) {
+        return UserInfoDto.builder()
+                .email(signupRequest.getEmail())
+                .firstName(signupRequest.getFirstName())
+                .lastName(signupRequest.getLastName())
+                .phone(signupRequest.getPhone())
+                .build();
     }
 }
